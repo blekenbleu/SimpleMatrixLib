@@ -54,22 +54,17 @@ public:
         {
             gettimeofday(&m_time_end, NULL);
             m_running = false;
-            res = static_cast<double>(m_time_end.tv_sec - m_time_start.tv_sec) + static_cast<double>(m_time_end.tv_usec - m_time_start.tv_usec) / 1000000.0;
+            res = static_cast<double>(m_time_end.tv_sec - m_time_start.tv_sec)
+				+ static_cast<double>(m_time_end.tv_usec - m_time_start.tv_usec) / 1000000.0;
             if (nullptr != printInfo)
             {
                 std::cout << "Time elapsed - " << printInfo << ": ";
                 if (res > 1.0)
-                {
                     std::cout << res << " s\n";
-                }
                 else if (res > 0.001)
-                {
                     std::cout << res * 1000.0 << " ms\n";
-                }
                 else
-                {
                     std::cout << res * 1000000.0 << " us\n";
-                }
             }
         }
         return res;

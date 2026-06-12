@@ -1,5 +1,6 @@
 #include "../matBasic_real.hpp"
 #include "matBasic_testUtil.hpp"
+#include "matBasic_real_fileio.hpp"
 
 void realMatrixExamples()
 {
@@ -311,6 +312,7 @@ int main(int argc, char **argv)
     pinvTest(true);
     determinantTest();
 	realMatrixExamples();
+	read_gnuplotdata();
     std::cin.get();
     return 0;
 }

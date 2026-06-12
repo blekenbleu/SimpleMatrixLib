@@ -126,4 +126,7 @@ done.
 * [LU Decomposition C++ Implementation](https://blog.csdn.net/xx_123_1_rj/article/details/39553809)
 * [LU Decomposition](https://www.math.ucdavis.edu/~linear/old/notes11.pdf)  
 
-<p align="center">*** Project by Fanseline in Ericsson ***</p>
+*12 Jun 2026*:&nbsp; add `Test/matBasic_real_fileio.hpp` to load matrices from
+	[corrCA](https://github.com/blekenbleu/CorrCA/tree/PPM) gnuplot data
+
+<p align="center"><b>Project by <i>Fanseline in Ericsson</i></b></p>
