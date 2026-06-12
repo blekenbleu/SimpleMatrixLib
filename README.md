@@ -20,87 +20,104 @@ A simple C++ stdlib-based complex &amp; real matrix library,
 	using Moore-Penrose pinv, NOT same as MATLAB for a [singular matrix](https://en.wikipedia.org/wiki/Singular_matrix)
 
 
-## Examples (Complex Matrices Only)
+## Real matrix examples
 ```cpp
-#include "matBasic_complex.hpp"
+#include "matBasic_real.hpp"
+/*
+ ; using i_real_matrix = std::vector<std::vector<double>>;
+ */
 int main(int argc, char **argv)
 {
-    i_complex_matrix matA = {
-            {{1.0, 0.0}, {0.0, 1.0}, {4.0, 0.0}},
-            {{0.0, 5.0}, {1.0, 0.0}, {4.0, 0.0}},
-            {{8.0, 0.0}, {1.0, 1.0}, {0.0, 0.0}}};
-    showMatrix(matA, "A");
-    std::cout << "rank(A) = " << rank(matA) << "\n";
-    std::cout << "det(A) = " << det(matA) << "\n";
-    showMatrix(inv(matA), "inv(A)");
-    showMatrix(pinv(matA), "pinv(A)");
-    showMatrix(pinv2(matA), "pinv2(A)");
+	i_real_matrix matC = {
+        {1.0, 2.0, 3.0, 5.0},
+        {2.0, 5.0, 3.0, 6.0},
+        {0.0, 4.0, 1.0, 5.0},
+        {-6.0, 3.0, 9.0, 1.0}};
+    std::cout << "rank(matC) = " << rank(matC) << "\n";
+    showMatrix(matC, "matC");
+    showMatrix(inv(matC), "inv(matC)");
+    showMatrix(pinv(matC), "pinv(matC)");
+    showMatrix(pinv2(matC), "pinv2(matC)");
+    std::cout << "\n\n";
 
-    i_complex_matrix matb = {
-        {{1.0, 0.0}},
-        {{1.0, 2.0}},
-        {{0.0, 3.0}}};
-    showMatrix(matb, "b");
-	std::cout << "leftDiv(matA, matb) << "\n";
-    showMatrix(leftDiv(matA, matb), "A \\ b");
-    showMatrix(matMul(inv(matA), matb), "inv(A) * b");
-    showMatrix(matMul(pinv(matA), matb), "pinv(A) * b");
-    showMatrix(matMul(pinv2(matA), matb), "pinv2(A) * b (== A \\ b)");
+    i_real_matrix matD = {
+        {1.0, 2.0, 3.0, 5.0},
+        {2.0, 5.0, 3.0, 6.0},
+        {0.0, 4.0, 1.0, 5.0},
+        {-6.0, 3.0, 9.0, 1.0},
+        {1.0, 1.0, 4.0, 5.0}};
+    std::cout << "rank(matD) = " << rank(matD) << "\n";
+    showMatrix(matD, "matD");
+    showMatrix(pinv(matD), "pinv(matD)");
+    showMatrix(pinv2(matD), "pinv2(matD)");
+	showMatrix(leftDiv(matD, matb), "D \\ b (pinv2(D) * b)");
+    std::cout << "\ndone.\n\n";
     std::cin.get();
     return 0;
 }
 ```
 ### Output
 ```
-A : 3 x 3 Complex Matrix:
-    row[1]: 1,  0+1i,  4;
-    row[2]: 0+5i,  1,  4;
-    row[3]: 8,  1+1i,  0;
+rank(matC) = 4
+matC : 4 x 4 Real Matrix:
+    row[1]: 1,  2,  3,  5;
+    row[2]: 2,  5,  3,  6;
+    row[3]: 0,  4,  1,  5;
+    row[4]: -6,  3,  9,  1;
 
-rank(A) = 3
-det(A) = (-56,48)
-inv(A) : 3 x 3 Complex Matrix:
-    row[1]: 0.00588235+0.0764706i,  -0.00588235-0.0764706i,  0.0764706-0.00588235i;
-    row[2]: -0.329412-0.282353i,  0.329412+0.282353i,  0.217647-0.170588i;
-    row[3]: 0.177941+0.0632353i,  0.0720588-0.0632353i,  -0.0617647-0.0529412i;
+inv(matC) : 4 x 4 Real Matrix:
+    row[1]: -0.0334347,  0.334347,  -0.355623,  -0.0607903;
+    row[2]: -0.431611,  0.316109,  0.0455927,  0.0334347;
+    row[3]: 0.0851064,  0.148936,  -0.276596,  0.0638298;
+    row[4]: 0.328267,  -0.282675,  0.218845,  -0.0395137;
 
-pinv(A) : 3 x 3 Complex Matrix:
-    row[1]: 0.00588235+0.0764706i,  -0.00588235-0.0764706i,  0.0764706-0.00588235i;
-    row[2]: -0.329412-0.282353i,  0.329412+0.282353i,  0.217647-0.170588i;
-    row[3]: 0.177941+0.0632353i,  0.0720588-0.0632353i,  -0.0617647-0.0529412i;
+pinv(matC) : 4 x 4 Real Matrix:
+    row[1]: -0.0334347,  0.334347,  -0.355623,  -0.0607903;
+    row[2]: -0.431611,  0.316109,  0.0455927,  0.0334347;
+    row[3]: 0.0851064,  0.148936,  -0.276596,  0.0638298;
+    row[4]: 0.328267,  -0.282675,  0.218845,  -0.0395137;
 
-pinv2(A) : 3 x 3 Complex Matrix:
-    row[1]: 0.00588235+0.0764706i,  -0.00588235-0.0764706i,  0.0764706-0.00588235i;
-    row[2]: -0.329412-0.282353i,  0.329412+0.282353i,  0.217647-0.170588i;
-    row[3]: 0.177941+0.0632353i,  0.0720588-0.0632353i,  -0.0617647-0.0529412i;
+pinv2(matC) : 4 x 4 Real Matrix:
+    row[1]: -0.0334347,  0.334347,  -0.355623,  -0.0607903;
+    row[2]: -0.431611,  0.316109,  0.0455927,  0.0334347;
+    row[3]: 0.0851064,  0.148936,  -0.276596,  0.0638298;
+    row[4]: 0.328267,  -0.282675,  0.218845,  -0.0395137;
 
 
-
-b : 3 x 1 Complex Matrix:
+b : 5 x 1 Real Matrix:
     row[1]: 1;
-    row[2]: 1+2i;
-    row[3]: 0+3i;
+    row[2]: 2;
+    row[3]: 3;
+    row[4]: 4;
+    row[5]: 5;
 
-leftDiv(matA, matb)
-A \ b : 3 x 1 Complex Matrix:
-    row[1]: 0.170588+0.217647i;
-    row[2]: -0.0529412+1.31176i;
-    row[3]: 0.535294-0.0411765i;
+rank(matD) = 4
+matD : 5 x 4 Real Matrix:
+    row[1]: 1,  2,  3,  5;
+    row[2]: 2,  5,  3,  6;
+    row[3]: 0,  4,  1,  5;
+    row[4]: -6,  3,  9,  1;
+    row[5]: 1,  1,  4,  5;
 
-inv(A) * b : 3 x 1 Complex Matrix:
-    row[1]: 0.170588+0.217647i;
-    row[2]: -0.0529412+1.31176i;
-    row[3]: 0.535294-0.0411765i;
+pinv(matD) : 4 x 5 Real Matrix:
+    row[1]: -0.0361407,  0.334645,  -0.355048,  -0.0608445,  0.00178416;
+    row[2]: -0.113013,  0.280993,  -0.0220854,  0.0398194,  -0.210058;
+    row[3]: -0.00114908,  0.158443,  -0.258273,  0.0621012,  0.0568698;
+    row[4]: 0.119108,  -0.259621,  0.263276,  -0.0437052,  0.137903;
 
-pinv(A) * b : 3 x 1 Complex Matrix:
-    row[1]: 0.170588+0.217647i;
-    row[2]: -0.0529412+1.31176i;
-    row[3]: 0.535294-0.0411765i;
+pinv2(matD) : 4 x 5 Real Matrix:
+    row[1]: -0.0361407,  0.334645,  -0.355048,  -0.0608445,  0.00178416;
+    row[2]: -0.113013,  0.280993,  -0.0220854,  0.0398194,  -0.210058;
+    row[3]: -0.00114908,  0.158443,  -0.258273,  0.0621012,  0.0568698;
+    row[4]: 0.119108,  -0.259621,  0.263276,  -0.0437052,  0.137903;
 
-pinv2(A) * b (== A \ b) : 3 x 1 Complex Matrix:
-    row[1]: 0.170588+0.217647i;
-    row[2]: -0.0529412+1.31176i;
-    row[3]: 0.535294-0.0411765i;
+D \ b (pinv2(matD) * matb) : 4 x 1 Real Matrix:
+    row[1]: -0.666453;
+    row[2]: -0.508292;
+    row[3]: 0.0736727;
+    row[4]: 0.904385;
+
+done.
 ```
 
 ## References

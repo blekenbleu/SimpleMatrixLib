@@ -110,7 +110,7 @@ void complexMatrixExamples()
     showMatrix(leftDiv(matC, matb), "C \\ b");
     showMatrix(matMul(pinv(matC), matb), "pinv(C) * b");
     showMatrix(matMul(pinv2(matC), matb), "pinv2(C) * b (== C \\ b)");
-    std::cout << "\n\n";
+    std::cout << "\ndone.\n\n";
 }
 
 int main(int argc, char **argv)
