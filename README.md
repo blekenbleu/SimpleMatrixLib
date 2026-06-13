@@ -127,6 +127,26 @@ done.
 * [LU Decomposition](https://www.math.ucdavis.edu/~linear/old/notes11.pdf)  
 
 *12 Jun 2026*:&nbsp; add `Test/matBasic_real_fileio.hpp` to load matrices from
-	[corrCA](https://github.com/blekenbleu/CorrCA/tree/PPM) gnuplot data
+	[corrCA](https://github.com/blekenbleu/CorrCA/tree/PPM) gnuplot data  
+*13 Jun 2026*:
+```
+Time elapsed - read_gnuplotdata(): 1000 us
+rank(xyG) = 9
+rank(dxyRB) = 4
+rank(mpxyG) = 10 Moore-Penrose pseudoinverse of xyG
+Time elapsed - pinv2(xyG): 0 us
+Time elapsed - matMul(mpxyG, dxyRB): 0 us
+matMul(mpinv(xyG), dxyRB) : 10 x 4 Real Matrix:
+    row[1]: 0.59695,  0.425711,  -0.424087,  -0.632403;
+    row[2]: -0.137462,  0.880188,  -3.49798,  -1.99355;
+    row[3]: 0.644413,  -0.512948,  -1.68163,  -1.42262;
+    row[4]: -3.42902,  -1.19754,  7.77443,  1.95765;
+    row[5]: -0.536702,  -1.17198,  1.93358,  2.28889;
+    row[6]: 2.38586,  0.295538,  -5.31827,  0.0579299;
+    row[7]: -0.140215,  0.787737,  -0.276673,  -1.58803;
+    row[8]: -1.63431,  -1.54493,  2.9548,  3.99772;
+    row[9]: 0.243646,  1.48698,  -0.118127,  -4.00873;
+    row[10]: 1.4666,  0.210127,  -2.92785,  -0.120092;
+```
 
 <p align="center"><b>Project by <i>Fanseline in Ericsson</i></b></p>
