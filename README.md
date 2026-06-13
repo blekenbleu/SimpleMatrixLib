@@ -1,4 +1,4 @@
-# NaiveMatrixLib - [*Visual Studio fork*](https://blekenbleu.github.io/static/ImageProcessing/matrix.htm)
+# SimpleMatrixLib - [*Visual Studio fork*](https://blekenbleu.github.io/static/ImageProcessing/matrix.htm)
 A simple C++ stdlib-based complex &amp; real matrix library,  
 &emsp; with matrix inversion, [left division (A\b)](https://help.altair.com/compose/help/en_us/topics/language_guides/left_matrix_division_r.htm) and determinant calculation.<br />
 
