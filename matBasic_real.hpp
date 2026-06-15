@@ -278,6 +278,7 @@ i_real_matrix inv(const i_real_matrix &matG, const bool usePermute = true)
             matLU.push_back(matG[permuteLU[i]]); // Make a permuted matrix with new row order
     }
     else matLU = i_real_matrix(matG); // Simply duplicate matrix
+//	showMatrix(matLU, "inv matLU before");
 
     // ******************** Step 2: LU decomposition (save both L & U in matLU) ********************
     if (matLU[0][0] == 0.0)
@@ -306,6 +307,7 @@ i_real_matrix inv(const i_real_matrix &matG, const bool usePermute = true)
             matLU[k][i] /= matLU[i][i];
         }
     }
+//	showMatrix(matLU, "inv matLU after");
 
     // ******************** Step 3: L & U inversion (save both L^-1 & U^-1 in matLU_inv) ********************
     i_real_matrix matLU_inv = initRealMatrix(nSize, nSize);
@@ -327,6 +329,7 @@ i_real_matrix inv(const i_real_matrix &matG, const bool usePermute = true)
             matLU_inv[k - 1][i] /= matLU[k - 1][k - 1];
         }
     }
+//	showMatrix(matLU_inv, "inv matLU_inv");
 
     // ******************** Step 4: Calculate G^-1 = U^-1 * L^-1 ********************
     // Lower part product
@@ -347,6 +350,7 @@ i_real_matrix inv(const i_real_matrix &matG, const bool usePermute = true)
             for (k = j + 1; k < nSize; ++k)
                 matLU[i][jp] += matLU_inv[i][k] * matLU_inv[k][j];
         }
+//	showMatrix(matLU, "inv matLU final");
     return matLU; // Reused matLU as a result container
 }
 
@@ -374,6 +378,7 @@ i_real_matrix pinv2(const i_real_matrix &matG, const i_float_t tolerance = 1.0e-
         matA = matMul(matG, matGt); // A = G * G'
     }
     else matA = matMul(matGt, matG); // A = G' * G
+//	showMatrix(matA, "pinv2 matA"); 
 
     // Full rank Cholesky decomposition of A
     std::size_t i{0}, j{0}, k{0};
@@ -407,6 +412,7 @@ i_real_matrix pinv2(const i_real_matrix &matG, const i_float_t tolerance = 1.0e-
             ++rankA;
         }
     }
+//	showMatrix(matL, "pinv2 matL");
 
     if (rankA == 0)
         return matGt; // All-zero matrix's transpose
@@ -420,6 +426,9 @@ i_real_matrix pinv2(const i_real_matrix &matG, const i_float_t tolerance = 1.0e-
     i_real_matrix matLt = transpose(matL);
     i_real_matrix matM = inv(matMul(matLt, matL), false);   // M = inv(L' * L)
     matA = matMul(matMul(matMul(matL, matM), matM), matLt); // A = L * M * M * L'
+//	showMatrix(matMul(matL, matM), "pinv2 matLM");
+//	showMatrix(matMul(matMul(matL, matM), matM), "pinv2 matLMM");
+//	showMatrix(matA, "pinv2 matA");
 
     return (useTranspose)
 			? matMul(matGt, matA)	// pinv(G) = G' * (L * M * M * L')
