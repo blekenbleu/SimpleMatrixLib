@@ -6,8 +6,8 @@ typedef unsigned char uchar;
 int read_gnuplotdata(i_real_matrix &xyG, i_real_matrix &dxyRB)
 {
 	char b[401]{}, *str_d = "", *str_end = "",
-		fname[] = FOLDER "Before_redefineG.txt",
-//		fname[] = "../../../Test/Before_redefineG.txt",
+//		fname[] = FOLDER "Before_redefineG.txt",
+		fname[] = "../../../Test/Before_redefineG.txt",
 		line2[] = "xG,yG,dxR,dyR,dxB,dyB,sxR,syR,sxB,syB";
 	double xG,yG,dxR,dyR,dxB,dyB;
 	int len, row, rows = 0;
@@ -39,7 +39,7 @@ int read_gnuplotdata(i_real_matrix &xyG, i_real_matrix &dxyRB)
 	for (row = 0; row < rows && f.good(); row++) {
 		// 10 comma-separated floats per line; want the first 6
 		f.getline(b, 400, '\n');
-		if (100 > (len = (int)f.gcount()))
+		if (90 > (len = (int)f.gcount()))
 			printf("unexpected data line at row %d:\n\t%s\n", row, b);
 		xG = strtod(str_d = b, &str_end);
 		str_d = 1 + str_end;	// ignore ','
